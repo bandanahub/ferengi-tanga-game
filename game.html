@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Ferengi Tanga Game</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+      font-family: Arial, sans-serif;
+            padding: 20px;
+            transition: background-color 0.5s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        #play-button {
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
     <h1>Ferengi Tanga Game</h1>
@@ -12,9 +27,37 @@
     <button id="play-button">Play</button>
     <p id="game-result"></p>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./script.js">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#play-button').click(function() {
+                const bet = $('#bet').val();
+                $.ajax({
+                    url: 'http://localhost:3001/play',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ bet: parseInt(bet) }),
+                    success: function(data) {
+                        $('#game-result').text(data.message);
+                        $('#latinum').text('You have ' + data.playerLatinum + ' bars of gold-pressed latinum');
 
+                        if (data.playerLatinum > 100) {
+    $('body').css('background-color', 'green'); 
+} else if (data.playerLatinum < 100) {
+    $('body').css('background-color', 'red'); 
+} else if (data.playerLatinum === 100) {
+    $('body').css('background-color', 'yellow'); 
+} else {
+    $('body').css('background-color', 'white'); 
+}
+
+                    },
+                    error: function(error) {
+                        console.error('Error:', error);
+                    },
+                });
+            });
+        });
     </script>
 </body>
 </html>
