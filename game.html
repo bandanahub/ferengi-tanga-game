@@ -42,13 +42,13 @@
                         $('#latinum').text('You have ' + data.playerLatinum + ' bars of gold-pressed latinum');
 
                         if (data.playerLatinum > 100) {
-    $('body').css('background-color', 'green'); 
+    $('body').css('background-color', 'green'); // The user has won latinum
 } else if (data.playerLatinum < 100) {
-    $('body').css('background-color', 'red'); 
+    $('body').css('background-color', 'red'); // The user has lost latinum
 } else if (data.playerLatinum === 100) {
-    $('body').css('background-color', 'yellow'); 
+    $('body').css('background-color', 'yellow'); // The user has exactly 100 bars of latinum
 } else {
-    $('body').css('background-color', 'white'); 
+    $('body').css('background-color', 'white'); // The user hasn't won or lost any latinum
 }
 
                     },
