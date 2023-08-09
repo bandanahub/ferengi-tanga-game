@@ -17,6 +17,15 @@ let playerLatinum = 100;
 
 const rollDie = () => Math.floor(Math.random() * 6) + 1;
 
+// Define a handler for the root route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Ferengi Tanga Game!'); // Change this message if needed
+});
+
+app.get('/play', (req, res) => {
+    // ... Your route logic ...
+});
+
 app.post('/play', (req, res) => {
     const playerBet = req.body.bet;
 
